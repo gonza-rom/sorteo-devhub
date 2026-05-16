@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteo DevHub</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap');
   @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
+  html, body {
     background: #000;
+    min-height: 100vh;
+    font-family: 'Space Mono', monospace;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    min-height: 100vh;
-    font-family: 'Space Mono', monospace;
   }
 
   #app {
     background: #000;
     color: #fff;
-    width: 520px;
-    min-height: 700px;
-    padding: 2rem 2rem 1.5rem;
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    padding: clamp(1.2rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem) 1.5rem;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -30,32 +33,26 @@
     align-items: center;
   }
 
+  /* ── LOGO ── */
   .logo-area {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.2rem, 4vw, 2rem);
     position: relative;
     z-index: 1;
+    width: 100%;
   }
 
-  .logo-text {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -2px;
-    line-height: 1;
-  }
-
-  .logo-dot {
-    color: #fff;
-    opacity: 0.4;
+  .logo-area img {
+    width: clamp(100px, 35vw, 160px);
+    height: auto;
+    display: block;
   }
 
   .logo-tagline {
-    font-size: 10px;
+    font-size: clamp(8px, 2.2vw, 10px);
     color: #ffffff;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -70,15 +67,14 @@
     margin-top: 0.2rem;
   }
 
-  .screen { display: none; flex-direction: column; align-items: center; gap: 1.2rem; width: 100%; }
+  /* ── SCREENS ── */
+  .screen { display: none; flex-direction: column; align-items: center; gap: clamp(0.8rem, 3vw, 1.2rem); width: 100%; }
   .screen.active { display: flex; }
 
-  .screen-title {
-    text-align: center;
-  }
+  .screen-title { text-align: center; }
 
   .subtitle {
-    font-size: 10px;
+    font-size: clamp(9px, 2.5vw, 10px);
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -87,7 +83,7 @@
 
   h1 {
     font-family: 'Syne', sans-serif;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 6vw, 2rem);
     font-weight: 900;
     letter-spacing: -1px;
     color: #fff;
@@ -95,39 +91,30 @@
 
   textarea {
     width: 100%;
-    height: 130px;
+    height: clamp(100px, 25vw, 130px);
     background: #0d0d0d;
     border: 1px solid #282828;
     border-radius: 8px;
     color: #fff;
     font-family: 'Space Mono', monospace;
-    font-size: 11px;
+    font-size: clamp(10px, 2.5vw, 11px);
     padding: 12px;
     resize: vertical;
     outline: none;
     transition: border-color 0.2s;
+    -webkit-appearance: none;
   }
   textarea:focus { border-color: #444; }
   textarea::placeholder { color: #ffffff; }
-
-  .info-row {
-    font-size: 12px;
-    color: #888;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .info-row i { font-size: 14px; }
-  .info-row strong { color: #fff; }
 
   .btn {
     background: #fff;
     color: #000;
     border: none;
     border-radius: 6px;
-    padding: 12px 32px;
+    padding: clamp(10px, 3vw, 12px) clamp(20px, 6vw, 32px);
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-size: clamp(11px, 3vw, 12px);
     font-weight: 700;
     cursor: pointer;
     letter-spacing: 1px;
@@ -135,6 +122,8 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   .btn:hover { background: #e8e8e8; }
   .btn:active { transform: scale(0.97); }
@@ -146,7 +135,14 @@
   }
   .btn.ghost:hover { border-color: #ebebeb; color: #fff; }
 
-  /* ── STAT CHIP ── */
+  /* ── STAT CHIPS ── */
+  .chips-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
   .stat-chip {
     display: flex;
     align-items: center;
@@ -154,30 +150,43 @@
     background: #0d0d0d;
     border: 1px solid #222;
     border-radius: 8px;
-    padding: 10px 16px;
+    padding: clamp(8px, 2.5vw, 10px) clamp(10px, 3vw, 16px);
     width: 100%;
   }
 
   .stat-chip-icon {
-    width: 36px;
-    height: 36px;
+    width: clamp(28px, 8vw, 36px);
+    height: clamp(28px, 8vw, 36px);
     background: #161616;
     border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 18px;
+    font-size: clamp(15px, 4vw, 18px);
     border: 1px solid #2a2a2a;
+    flex-shrink: 0;
   }
 
-  .stat-chip-label { font-size: 10px; color: #ffffff; letter-spacing: 2px; text-transform: uppercase; }
-  .stat-chip-value { font-size: 22px; font-family: 'Syne', sans-serif; font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1; }
+  .stat-chip-label {
+    font-size: clamp(8px, 2vw, 10px);
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .stat-chip-value {
+    font-size: clamp(17px, 5vw, 22px);
+    font-family: 'Syne', sans-serif;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
 
   /* ── DRUM ── */
   #drum-container {
     width: 100%;
-    height: 240px;
+    height: clamp(180px, 45vw, 240px);
     position: relative;
     overflow: hidden;
     border: 1px solid #1e1e1e;
@@ -190,7 +199,7 @@
     content: '';
     position: absolute;
     left: 0; right: 0;
-    height: 90px;
+    height: 35%;
     z-index: 2;
     pointer-events: none;
   }
@@ -226,7 +235,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: clamp(11px, 3vw, 13px);
     font-family: 'Space Mono', monospace;
     color: #f5f5f5;
     padding: 0 1rem;
@@ -241,20 +250,18 @@
   .drum-item.active {
     color: #fff;
     font-weight: 700;
-    font-size: 16px;
+    font-size: clamp(13px, 4vw, 16px);
     letter-spacing: -0.5px;
   }
-  .drum-item.near {
-    color: #dfdfdf;
-  }
+  .drum-item.near { color: #dfdfdf; }
 
-  /* ── COUNTER ── */
+  /* ── PROGRESS ── */
   .counter-bar {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 11px;
+    gap: 10px;
+    font-size: clamp(10px, 2.5vw, 11px);
     color: #f1f1f1;
   }
   .progress-fill {
@@ -269,7 +276,7 @@
     background: #0a0a0a;
     border: 1px solid #222;
     border-radius: 14px;
-    padding: 2.5rem 2rem;
+    padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 4vw, 2rem);
     text-align: center;
     width: 100%;
     animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
@@ -283,7 +290,7 @@
   }
 
   .winner-label {
-    font-size: 10px;
+    font-size: clamp(9px, 2.5vw, 10px);
     letter-spacing: 4px;
     color: #ffffff;
     text-transform: uppercase;
@@ -293,12 +300,11 @@
     justify-content: center;
     gap: 8px;
   }
-
   .winner-label i { font-size: 16px; color: #f1f1f1; }
 
   .winner-username {
     font-family: 'Syne', sans-serif;
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
     font-weight: 900;
     color: #fff;
     word-break: break-all;
@@ -308,13 +314,18 @@
   }
 
   .winner-meta {
-    font-size: 11px;
+    font-size: clamp(10px, 2.5vw, 11px);
     color: #fafafa;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.2rem, 4vw, 2rem);
     letter-spacing: 1px;
   }
 
-  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
   /* ── CONFETTI ── */
   .confetti-dot {
@@ -332,7 +343,7 @@
   .footer-strip {
     margin-top: auto;
     padding-top: 1.2rem;
-    font-size: 9px;
+    font-size: clamp(8px, 2vw, 9px);
     color: #ffffff;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -342,16 +353,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
   }
   .footer-strip i { font-size: 12px; }
+  .footer-sep { color: #222; }
 </style>
 </head>
 <body>
 <div id="app">
 
   <div class="logo-area">
-    <div class="logo-text"><img src="devhub.png" alt="" srcset=""></div>
+    <img src="devhub.png" alt="DevHub">
     <div class="logo-tagline">Soluciones Digitales</div>
     <div class="logo-rule"></div>
   </div>
@@ -362,20 +375,23 @@
       <div class="subtitle">sorteo instagram</div>
       <h1>Quién gana?</h1>
     </div>
+
     <textarea id="participants-input" placeholder="Pegá los usernames aquí&#10;&#10;usuario1&#10;usuario2&#10;usuario3&#10;...&#10;(uno por línea o separados por coma)"></textarea>
 
-    <div class="stat-chip">
-      <div class="stat-chip-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
-      <div>
-        <div class="stat-chip-label">Participantes</div>
-        <div class="stat-chip-value" id="count-loaded">0</div>
+    <div class="chips-row">
+      <div class="stat-chip">
+        <div class="stat-chip-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+        <div>
+          <div class="stat-chip-label">Participantes</div>
+          <div class="stat-chip-value" id="count-loaded">0</div>
+        </div>
       </div>
-    </div>
-    <div class="stat-chip">
-      <div class="stat-chip-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
-      <div>
-        <div class="stat-chip-label">Comentarios</div>
-        <div class="stat-chip-value" id="count-loaded">8k</div>
+      <div class="stat-chip">
+        <div class="stat-chip-icon"><i class="ti ti-message-circle" aria-hidden="true"></i></div>
+        <div>
+          <div class="stat-chip-label">Comentarios</div>
+          <div class="stat-chip-value" >8k</div>
+        </div>
       </div>
     </div>
 
@@ -430,7 +446,7 @@
   <div class="footer-strip">
     <i class="ti ti-map-pin" aria-hidden="true"></i>
     catamarca / córdoba
-    <span style="color:#1a1a1a">·</span>
+    <span class="footer-sep">·</span>
     <i class="ti ti-brand-instagram" aria-hidden="true"></i>
     devhub.arg
   </div>
@@ -439,14 +455,20 @@
 <script>
 let participants = [];
 let winnerData = null;
+let totalComments = 0;
 
 const input = document.getElementById('participants-input');
 const countEl = document.getElementById('count-loaded');
+const countComments = document.getElementById('count-comments');
 
-input.addEventListener('input', () => {
+input.addEventListener('input', updateCounts);
+
+function updateCounts() {
   participants = parseInput(input.value);
+  totalComments = participants.length;
   countEl.textContent = participants.length.toLocaleString();
-});
+  countComments.textContent = participants.length.toLocaleString();
+}
 
 function parseInput(raw) {
   return raw
@@ -482,7 +504,7 @@ function buildDrum(items) {
 function spinDrum() {
   const winner = participants[Math.floor(Math.random() * participants.length)];
   const ITEM_H = 52;
-  const CONTAINER_H = 240;
+  const CONTAINER_H = parseInt(getComputedStyle(document.getElementById('drum-container')).height);
   const CENTER_OFFSET = (CONTAINER_H - ITEM_H) / 2;
 
   const shuffled = [...participants].sort(() => Math.random() - 0.5);
@@ -538,7 +560,8 @@ function spinDrum() {
 function showWinner(username) {
   winnerData = { username };
   document.getElementById('w-username').textContent = '@' + username;
-  document.getElementById('w-meta').textContent = participants.length.toLocaleString() + ' participantes · sorteo devhub';
+  document.getElementById('w-meta').textContent =
+    participants.length.toLocaleString() + ' participantes · sorteo devhub';
   show('screen-winner');
   launchConfetti();
 }
@@ -563,7 +586,6 @@ function copyWinner() {
   if (!winnerData) return;
   navigator.clipboard.writeText('@' + winnerData.username).then(() => {
     const btn = event.target.closest('.btn');
-    const icon = btn.querySelector('i');
     const orig = btn.innerHTML;
     btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Copiado';
     setTimeout(() => { btn.innerHTML = orig; }, 1600);
@@ -576,8 +598,7 @@ function resetAll() {
 }
 
 setInterval(() => {
-  const val = input.value;
-  if (val.length > 0) { participants = parseInput(val); countEl.textContent = participants.length.toLocaleString(); }
+  if (input.value.length > 0) updateCounts();
 }, 500);
 </script>
 </body>
