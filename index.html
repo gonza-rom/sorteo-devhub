@@ -255,6 +255,33 @@
   }
   .drum-item.near { color: #dfdfdf; }
 
+  #drum-container2 {
+    width: 100%;
+    height: clamp(180px, 45vw, 240px);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    background: #060606;
+  }
+  #drum-container2::before,
+  #drum-container2::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 35%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  #drum-container2::before {
+    top: 0;
+    background: linear-gradient(to bottom, #060606 0%, transparent 100%);
+  }
+  #drum-container2::after {
+    bottom: 0;
+    background: linear-gradient(to top, #060606 0%, transparent 100%);
+  }
+
   /* ── PROGRESS ── */
   .counter-bar {
     width: 100%;
@@ -272,16 +299,21 @@
   }
 
   /* ── WINNER ── */
-  #winner-card {
+  .winner-card {
     background: #0a0a0a;
     border: 1px solid #222;
     border-radius: 14px;
-    padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1rem, 4vw, 2rem);
+    padding: clamp(1.2rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
     text-align: center;
     width: 100%;
     animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
     position: relative;
     overflow: hidden;
+  }
+
+  .winner-card.second {
+    border-color: #333;
+    margin-top: 0;
   }
 
   @keyframes pop {
@@ -304,7 +336,7 @@
 
   .winner-username {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(1.8rem, 8vw, 2.8rem);
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
     font-weight: 900;
     color: #fff;
     word-break: break-all;
@@ -316,8 +348,26 @@
   .winner-meta {
     font-size: clamp(10px, 2.5vw, 11px);
     color: #fafafa;
-    margin-bottom: clamp(1.2rem, 4vw, 2rem);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
     letter-spacing: 1px;
+  }
+
+  .winners-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .winners-divider::before,
+  .winners-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
   }
 
   .btn-row {
@@ -390,7 +440,7 @@
         <div class="stat-chip-icon"><i class="ti ti-message-circle" aria-hidden="true"></i></div>
         <div>
           <div class="stat-chip-label">Comentarios</div>
-          <div class="stat-chip-value" >8k</div>
+          <div class="stat-chip-value">8k</div>
         </div>
       </div>
     </div>
@@ -418,22 +468,78 @@
     </div>
   </div>
 
-  <!-- WINNER -->
-  <div id="screen-winner" class="screen">
+  <!-- WINNER 1 -->
+  <div id="screen-winner1" class="screen">
     <div class="screen-title">
-      <div class="subtitle">y el ganador es</div>
+      <div class="subtitle">primer ganador</div>
     </div>
-    <div id="winner-card">
+    <div class="winner-card">
       <div class="winner-label">
         <i class="ti ti-trophy" aria-hidden="true"></i>
-        ganador
+        ganador 1
       </div>
-      <div class="winner-username" id="w-username">@usuario</div>
-      <div class="winner-meta" id="w-meta">sorteo devhub</div>
+      <div class="winner-username" id="w1-username">@usuario</div>
+      <div class="winner-meta" id="w1-meta">sorteo devhub</div>
       <div class="btn-row">
-        <button class="btn" onclick="copyWinner()">
+        <button class="btn" onclick="copyWinner(1)">
           <i class="ti ti-copy" aria-hidden="true"></i>
-          Copiar usuario
+          Copiar
+        </button>
+        <button class="btn" onclick="spinSecond()">
+          <i class="ti ti-player-play" aria-hidden="true"></i>
+          Sortear ganador 2
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPIN 2 -->
+  <div id="screen-spin2" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">segundo ganador</div>
+      <h1 id="spin2-count">sorteando...</h1>
+    </div>
+    <div id="drum-container2">
+      <div class="drum-selector"></div>
+      <div id="drum-track2" style="position:absolute;top:0;left:0;right:0;will-change:transform;"></div>
+    </div>
+    <div class="counter-bar">
+      <i class="ti ti-loader" aria-hidden="true"></i>
+      <span id="spin2-status">Girando...</span>
+      <div class="progress-fill"><div class="progress-inner" id="progress-bar2" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- AMBOS GANADORES -->
+  <div id="screen-winner-both" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">los ganadores son</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-label">
+        <i class="ti ti-trophy" aria-hidden="true"></i>
+        ganador 1
+      </div>
+      <div class="winner-username" id="wb1-username">@usuario1</div>
+      <div class="btn-row" style="margin-bottom:0.5rem">
+        <button class="btn" onclick="copyWinner(1)">
+          <i class="ti ti-copy" aria-hidden="true"></i>
+          Copiar
+        </button>
+      </div>
+    </div>
+    <div class="winners-divider">y</div>
+    <div class="winner-card second">
+      <div class="winner-label">
+        <i class="ti ti-trophy" aria-hidden="true"></i>
+        ganador 2
+      </div>
+      <div class="winner-username" id="wb2-username">@usuario2</div>
+      <div class="winner-meta" id="wb-meta">sorteo devhub</div>
+      <div class="btn-row">
+        <button class="btn" onclick="copyWinner(2)">
+          <i class="ti ti-copy" aria-hidden="true"></i>
+          Copiar
         </button>
         <button class="btn ghost" onclick="resetAll()">
           <i class="ti ti-refresh" aria-hidden="true"></i>
@@ -454,8 +560,7 @@
 
 <script>
 let participants = [];
-let winnerData = null;
-let totalComments = 0;
+let winners = [null, null];
 
 const input = document.getElementById('participants-input');
 const countEl = document.getElementById('count-loaded');
@@ -465,7 +570,6 @@ input.addEventListener('input', updateCounts);
 
 function updateCounts() {
   participants = parseInput(input.value);
-  totalComments = participants.length;
   countEl.textContent = participants.length.toLocaleString();
   countComments.textContent = participants.length.toLocaleString();
 }
@@ -484,14 +588,35 @@ function show(id) {
 
 function startSorteo() {
   participants = parseInput(input.value);
-  if (participants.length < 2) { alert('Necesitás al menos 2 participantes.'); return; }
+  if (participants.length < 3) { alert('Necesitás al menos 3 participantes para 2 ganadores.'); return; }
+  winners = [null, null];
   show('screen-spin');
   document.getElementById('spin-count').textContent = participants.length.toLocaleString() + ' participantes';
-  spinDrum();
+  spinDrum('drum-track', 'spin-status', 'progress-bar', participants, (winner) => {
+    winners[0] = winner;
+    document.getElementById('w1-username').textContent = '@' + winner;
+    document.getElementById('w1-meta').textContent = participants.length.toLocaleString() + ' participantes · sorteo devhub';
+    show('screen-winner1');
+    launchConfetti();
+  });
 }
 
-function buildDrum(items) {
-  const track = document.getElementById('drum-track');
+function spinSecond() {
+  const pool = participants.filter(p => p !== winners[0]);
+  show('screen-spin2');
+  document.getElementById('spin2-count').textContent = pool.length.toLocaleString() + ' participantes';
+  spinDrum('drum-track2', 'spin2-status', 'progress-bar2', pool, (winner) => {
+    winners[1] = winner;
+    document.getElementById('wb1-username').textContent = '@' + winners[0];
+    document.getElementById('wb2-username').textContent = '@' + winner;
+    document.getElementById('wb-meta').textContent = participants.length.toLocaleString() + ' participantes · sorteo devhub';
+    show('screen-winner-both');
+    launchConfetti();
+  });
+}
+
+function buildDrum(trackId, items) {
+  const track = document.getElementById(trackId);
   track.innerHTML = '';
   items.forEach((name) => {
     const div = document.createElement('div');
@@ -501,28 +626,30 @@ function buildDrum(items) {
   });
 }
 
-function spinDrum() {
-  const winner = participants[Math.floor(Math.random() * participants.length)];
+function spinDrum(trackId, statusId, progressId, pool, onDone) {
+  const winner = pool[Math.floor(Math.random() * pool.length)];
   const ITEM_H = 52;
-  const CONTAINER_H = parseInt(getComputedStyle(document.getElementById('drum-container')).height);
+  const containerId = trackId === 'drum-track' ? 'drum-container' : 'drum-container2';
+  const CONTAINER_H = parseInt(getComputedStyle(document.getElementById(containerId)).height);
   const CENTER_OFFSET = (CONTAINER_H - ITEM_H) / 2;
 
-  const shuffled = [...participants].sort(() => Math.random() - 0.5);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
   const REPEATS = 12;
   const extended = [];
   for (let r = 0; r < REPEATS; r++) shuffled.forEach(p => extended.push(p));
   const insertAt = extended.length - 5;
   extended[insertAt] = winner;
 
-  buildDrum(extended);
+  buildDrum(trackId, extended);
 
   const finalPos = insertAt * ITEM_H - CENTER_OFFSET;
-  const track = document.getElementById('drum-track');
-  const statusEl = document.getElementById('spin-status');
-  const progressBar = document.getElementById('progress-bar');
+  const track = document.getElementById(trackId);
+  const statusEl = document.getElementById(statusId);
+  const progressBar = document.getElementById(progressId);
 
   track.style.transition = 'none';
   track.style.transform = 'translateY(0px)';
+  progressBar.style.width = '0%';
 
   const DURATION = 8000;
   const start = performance.now();
@@ -538,7 +665,7 @@ function spinDrum() {
     track.style.transform = `translateY(${y}px)`;
 
     const currentItem = Math.round(Math.abs(y) / ITEM_H);
-    document.querySelectorAll('.drum-item').forEach((el, i) => {
+    track.querySelectorAll('.drum-item').forEach((el, i) => {
       const dist = Math.abs(i - currentItem);
       el.classList.toggle('active', dist === 0);
       el.classList.toggle('near', dist === 1);
@@ -551,19 +678,10 @@ function spinDrum() {
     else statusEl.textContent = 'Eligiendo ganador...';
 
     if (t < 1) requestAnimationFrame(animate);
-    else setTimeout(() => showWinner(winner), 600);
+    else setTimeout(() => onDone(winner), 600);
   }
 
   requestAnimationFrame(animate);
-}
-
-function showWinner(username) {
-  winnerData = { username };
-  document.getElementById('w-username').textContent = '@' + username;
-  document.getElementById('w-meta').textContent =
-    participants.length.toLocaleString() + ' participantes · sorteo devhub';
-  show('screen-winner');
-  launchConfetti();
 }
 
 function launchConfetti() {
@@ -582,9 +700,10 @@ function launchConfetti() {
   }
 }
 
-function copyWinner() {
-  if (!winnerData) return;
-  navigator.clipboard.writeText('@' + winnerData.username).then(() => {
+function copyWinner(n) {
+  const username = winners[n - 1];
+  if (!username) return;
+  navigator.clipboard.writeText('@' + username).then(() => {
     const btn = event.target.closest('.btn');
     const orig = btn.innerHTML;
     btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Copiado';
@@ -593,8 +712,10 @@ function copyWinner() {
 }
 
 function resetAll() {
+  winners = [null, null];
   show('screen-input');
   document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('progress-bar2').style.width = '0%';
 }
 
 setInterval(() => {
