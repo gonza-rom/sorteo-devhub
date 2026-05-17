@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteo DevHub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800;900&display=swap');
+  @import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #000;
+    min-height: 100vh;
+    font-family: 'Space Mono', monospace;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  #app {
+    background: #000;
+    color: #fff;
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+    padding: clamp(1.2rem, 5vw, 2rem) clamp(1rem, 5vw, 2rem) 1.5rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── LOGO ── */
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: clamp(1.2rem, 4vw, 2rem);
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .logo-area img {
+    width: clamp(100px, 35vw, 160px);
+    height: auto;
+    display: block;
+  }
+
+  .logo-tagline {
+    font-size: clamp(8px, 2.2vw, 10px);
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+  }
+
+  .logo-rule {
+    width: 32px;
+    height: 1px;
+    background: #333;
+    margin-top: 0.2rem;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; flex-direction: column; align-items: center; gap: clamp(0.8rem, 3vw, 1.2rem); width: 100%; }
+  .screen.active { display: flex; }
+
+  .screen-title { text-align: center; }
+
+  .subtitle {
+    font-size: clamp(9px, 2.5vw, 10px);
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 0.4rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: #fff;
+  }
+
+  textarea {
+    width: 100%;
+    height: clamp(100px, 25vw, 130px);
+    background: #0d0d0d;
+    border: 1px solid #282828;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(10px, 2.5vw, 11px);
+    padding: 12px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  textarea:focus { border-color: #444; }
+  textarea::placeholder { color: #ffffff; }
+
+  .btn {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    padding: clamp(10px, 3vw, 12px) clamp(20px, 6vw, 32px);
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(11px, 3vw, 12px);
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  .btn:hover { background: #e8e8e8; }
+  .btn:active { transform: scale(0.97); }
+
+  .btn.ghost {
+    background: transparent;
+    color: #e9e6e6;
+    border: 1px solid #2a2a2a;
+  }
+  .btn.ghost:hover { border-color: #ebebeb; color: #fff; }
+
+  /* ── STAT CHIPS ── */
+  .chips-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .stat-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 8px;
+    padding: clamp(8px, 2.5vw, 10px) clamp(10px, 3vw, 16px);
+    width: 100%;
+  }
+
+  .stat-chip-icon {
+    width: clamp(28px, 8vw, 36px);
+    height: clamp(28px, 8vw, 36px);
+    background: #161616;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: clamp(15px, 4vw, 18px);
+    border: 1px solid #2a2a2a;
+    flex-shrink: 0;
+  }
+
+  .stat-chip-label {
+    font-size: clamp(8px, 2vw, 10px);
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .stat-chip-value {
+    font-size: clamp(17px, 5vw, 22px);
+    font-family: 'Syne', sans-serif;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  /* ── DRUM ── */
+  #drum-container {
+    width: 100%;
+    height: clamp(180px, 45vw, 240px);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    background: #060606;
+  }
+
+  #drum-container::before,
+  #drum-container::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 35%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  #drum-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, #060606 0%, transparent 100%);
+  }
+  #drum-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, #060606 0%, transparent 100%);
+  }
+
+  .drum-selector {
+    position: absolute;
+    top: 50%;
+    left: 16px; right: 16px;
+    height: 52px;
+    transform: translateY(-50%);
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  #drum-track {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    will-change: transform;
+  }
+
+  .drum-item {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(11px, 3vw, 13px);
+    font-family: 'Space Mono', monospace;
+    color: #f5f5f5;
+    padding: 0 1rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    transition: color 0.06s;
+    letter-spacing: 0.5px;
+  }
+  .drum-item.active {
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(13px, 4vw, 16px);
+    letter-spacing: -0.5px;
+  }
+  .drum-item.near { color: #dfdfdf; }
+
+  #drum-container2 {
+    width: 100%;
+    height: clamp(180px, 45vw, 240px);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    background: #060606;
+  }
+  #drum-container2::before,
+  #drum-container2::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 35%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  #drum-container2::before {
+    top: 0;
+    background: linear-gradient(to bottom, #060606 0%, transparent 100%);
+  }
+  #drum-container2::after {
+    bottom: 0;
+    background: linear-gradient(to top, #060606 0%, transparent 100%);
+  }
+
+  /* ── PROGRESS ── */
+  .counter-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(10px, 2.5vw, 11px);
+    color: #f1f1f1;
+  }
+  .progress-fill {
+    flex: 1; height: 1px; background: #1a1a1a; overflow: hidden;
+  }
+  .progress-inner {
+    height: 100%; background: #fff; transition: width 0.3s; opacity: 0.4;
+  }
+
+  /* ── WINNER ── */
+  .winner-card {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: clamp(1.2rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
+    text-align: center;
+    width: 100%;
+    animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .winner-card.second {
+    border-color: #333;
+    margin-top: 0;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+
+  .winner-label {
+    font-size: clamp(9px, 2.5vw, 10px);
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .winner-label i { font-size: 16px; color: #f1f1f1; }
+
+  .winner-username {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 7vw, 2.5rem);
+    font-weight: 900;
+    color: #fff;
+    word-break: break-all;
+    margin-bottom: 0.4rem;
+    letter-spacing: -2px;
+    line-height: 1.1;
+  }
+
+  .winner-meta {
+    font-size: clamp(10px, 2.5vw, 11px);
+    color: #fafafa;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    letter-spacing: 1px;
+  }
+
+  .winners-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .winners-divider::before,
+  .winners-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── CONFETTI ── */
+  .confetti-dot {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(800px) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── FOOTER ── */
+  .footer-strip {
+    margin-top: auto;
+    padding-top: 1.2rem;
+    font-size: clamp(8px, 2vw, 9px);
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .footer-strip i { font-size: 12px; }
+  .footer-sep { color: #222; }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="logo-area">
+    <img src="devhub.png" alt="DevHub">
+    <div class="logo-tagline">Soluciones Digitales</div>
+    <div class="logo-rule"></div>
+  </div>
+
+  <!-- INPUT -->
+  <div id="screen-input" class="screen active">
+    <div class="screen-title">
+      <div class="subtitle">sorteo instagram</div>
+      <h1>Quién gana?</h1>
+    </div>
+
+    <textarea id="participants-input" placeholder="Pegá los usernames aquí&#10;&#10;usuario1&#10;usuario2&#10;usuario3&#10;...&#10;(uno por línea o separados por coma)"></textarea>
+
+    <div class="chips-row">
+      <div class="stat-chip">
+        <div class="stat-chip-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+        <div>
+          <div class="stat-chip-label">Participantes</div>
+          <div class="stat-chip-value" id="count-loaded">0</div>
+        </div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-icon"><i class="ti ti-message-circle" aria-hidden="true"></i></div>
+        <div>
+          <div class="stat-chip-label">Comentarios</div>
+          <div class="stat-chip-value">8k</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="startSorteo()">
+      <i class="ti ti-player-play" aria-hidden="true"></i>
+      Iniciar sorteo
+    </button>
+  </div>
+
+  <!-- SPIN -->
+  <div id="screen-spin" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">sorteando entre</div>
+      <h1 id="spin-count">0 participantes</h1>
+    </div>
+    <div id="drum-container">
+      <div class="drum-selector"></div>
+      <div id="drum-track"></div>
+    </div>
+    <div class="counter-bar">
+      <i class="ti ti-loader" aria-hidden="true"></i>
+      <span id="spin-status">Girando...</span>
+      <div class="progress-fill"><div class="progress-inner" id="progress-bar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- WINNER 1 -->
+  <div id="screen-winner1" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">primer ganador</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-label">
+        <i class="ti ti-trophy" aria-hidden="true"></i>
+        ganador 1
+      </div>
+      <div class="winner-username" id="w1-username">@usuario</div>
+      <div class="winner-meta" id="w1-meta">sorteo devhub</div>
+      <div class="btn-row">
+        <button class="btn" onclick="copyWinner(1)">
+          <i class="ti ti-copy" aria-hidden="true"></i>
+          Copiar
+        </button>
+        <button class="btn" onclick="spinSecond()">
+          <i class="ti ti-player-play" aria-hidden="true"></i>
+          Sortear ganador 2
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPIN 2 -->
+  <div id="screen-spin2" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">segundo ganador</div>
+      <h1 id="spin2-count">sorteando...</h1>
+    </div>
+    <div id="drum-container2">
+      <div class="drum-selector"></div>
+      <div id="drum-track2" style="position:absolute;top:0;left:0;right:0;will-change:transform;"></div>
+    </div>
+    <div class="counter-bar">
+      <i class="ti ti-loader" aria-hidden="true"></i>
+      <span id="spin2-status">Girando...</span>
+      <div class="progress-fill"><div class="progress-inner" id="progress-bar2" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- AMBOS GANADORES -->
+  <div id="screen-winner-both" class="screen">
+    <div class="screen-title">
+      <div class="subtitle">los ganadores son</div>
+    </div>
+    <div class="winner-card">
+      <div class="winner-label">
+        <i class="ti ti-trophy" aria-hidden="true"></i>
+        ganador 1
+      </div>
+      <div class="winner-username" id="wb1-username">@usuario1</div>
+      <div class="btn-row" style="margin-bottom:0.5rem">
+        <button class="btn" onclick="copyWinner(1)">
+          <i class="ti ti-copy" aria-hidden="true"></i>
+          Copiar
+        </button>
+      </div>
+    </div>
+    <div class="winners-divider">y</div>
+    <div class="winner-card second">
+      <div class="winner-label">
+        <i class="ti ti-trophy" aria-hidden="true"></i>
+        ganador 2
+      </div>
+      <div class="winner-username" id="wb2-username">@usuario2</div>
+      <div class="winner-meta" id="wb-meta">sorteo devhub</div>
+      <div class="btn-row">
+        <button class="btn" onclick="copyWinner(2)">
+          <i class="ti ti-copy" aria-hidden="true"></i>
+          Copiar
+        </button>
+        <button class="btn ghost" onclick="resetAll()">
+          <i class="ti ti-refresh" aria-hidden="true"></i>
+          Nuevo sorteo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-strip">
+    <i class="ti ti-map-pin" aria-hidden="true"></i>
+    catamarca / córdoba
+    <span class="footer-sep">·</span>
+    <i class="ti ti-brand-instagram" aria-hidden="true"></i>
+    devhub.arg
+  </div>
+</div>
+
+<script>
+let participants = [];
+let winners = [null, null];
+
+const input = document.getElementById('participants-input');
+const countEl = document.getElementById('count-loaded');
+const countComments = document.getElementById('count-comments');
+
+input.addEventListener('input', updateCounts);
+
+function updateCounts() {
+  participants = parseInput(input.value);
+  countEl.textContent = participants.length.toLocaleString();
+  countComments.textContent = participants.length.toLocaleString();
+}
+
+function parseInput(raw) {
+  return raw
+    .split(/[\n,]+/)
+    .map(s => s.trim().replace(/^@/, ''))
+    .filter(s => s.length > 0 && s.length < 50);
+}
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startSorteo() {
+  participants = parseInput(input.value);
+  if (participants.length < 3) { alert('Necesitás al menos 3 participantes para 2 ganadores.'); return; }
+  winners = [null, null];
+  show('screen-spin');
+  document.getElementById('spin-count').textContent = participants.length.toLocaleString() + ' participantes';
+  spinDrum('drum-track', 'spin-status', 'progress-bar', participants, (winner) => {
+    winners[0] = winner;
+    document.getElementById('w1-username').textContent = '@' + winner;
+    document.getElementById('w1-meta').textContent = participants.length.toLocaleString() + ' participantes · sorteo devhub';
+    show('screen-winner1');
+    launchConfetti();
+  });
+}
+
+function spinSecond() {
+  const pool = participants.filter(p => p !== winners[0]);
+  show('screen-spin2');
+  document.getElementById('spin2-count').textContent = pool.length.toLocaleString() + ' participantes';
+  spinDrum('drum-track2', 'spin2-status', 'progress-bar2', pool, (winner) => {
+    winners[1] = winner;
+    document.getElementById('wb1-username').textContent = '@' + winners[0];
+    document.getElementById('wb2-username').textContent = '@' + winner;
+    document.getElementById('wb-meta').textContent = participants.length.toLocaleString() + ' participantes · sorteo devhub';
+    show('screen-winner-both');
+    launchConfetti();
+  });
+}
+
+function buildDrum(trackId, items) {
+  const track = document.getElementById(trackId);
+  track.innerHTML = '';
+  items.forEach((name) => {
+    const div = document.createElement('div');
+    div.className = 'drum-item';
+    div.textContent = '@' + name;
+    track.appendChild(div);
+  });
+}
+
+function spinDrum(trackId, statusId, progressId, pool, onDone) {
+  const winner = pool[Math.floor(Math.random() * pool.length)];
+  const ITEM_H = 52;
+  const containerId = trackId === 'drum-track' ? 'drum-container' : 'drum-container2';
+  const CONTAINER_H = parseInt(getComputedStyle(document.getElementById(containerId)).height);
+  const CENTER_OFFSET = (CONTAINER_H - ITEM_H) / 2;
+
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  const REPEATS = 12;
+  const extended = [];
+  for (let r = 0; r < REPEATS; r++) shuffled.forEach(p => extended.push(p));
+  const insertAt = extended.length - 5;
+  extended[insertAt] = winner;
+
+  buildDrum(trackId, extended);
+
+  const finalPos = insertAt * ITEM_H - CENTER_OFFSET;
+  const track = document.getElementById(trackId);
+  const statusEl = document.getElementById(statusId);
+  const progressBar = document.getElementById(progressId);
+
+  track.style.transition = 'none';
+  track.style.transform = 'translateY(0px)';
+  progressBar.style.width = '0%';
+
+  const DURATION = 8000;
+  const start = performance.now();
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 5); }
+
+  function animate(now) {
+    const elapsed = now - start;
+    const t = Math.min(elapsed / DURATION, 1);
+    const eased = easeOut(t);
+    const y = -finalPos * eased;
+
+    track.style.transform = `translateY(${y}px)`;
+
+    const currentItem = Math.round(Math.abs(y) / ITEM_H);
+    track.querySelectorAll('.drum-item').forEach((el, i) => {
+      const dist = Math.abs(i - currentItem);
+      el.classList.toggle('active', dist === 0);
+      el.classList.toggle('near', dist === 1);
+    });
+
+    progressBar.style.width = (t * 100) + '%';
+
+    if (t < 0.5) statusEl.textContent = 'Girando...';
+    else if (t < 0.85) statusEl.textContent = 'Desacelerando...';
+    else statusEl.textContent = 'Eligiendo ganador...';
+
+    if (t < 1) requestAnimationFrame(animate);
+    else setTimeout(() => onDone(winner), 600);
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function launchConfetti() {
+  const colors = ['#fff','#bbb','#888','#555','#333'];
+  const app = document.getElementById('app');
+  for (let i = 0; i < 55; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'confetti-dot';
+    dot.style.left = Math.random() * 100 + '%';
+    dot.style.top = '-10px';
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.animationDuration = (2 + Math.random() * 2.5) + 's';
+    dot.style.animationDelay = (Math.random() * 1) + 's';
+    app.appendChild(dot);
+    setTimeout(() => dot.remove(), 5000);
+  }
+}
+
+function copyWinner(n) {
+  const username = winners[n - 1];
+  if (!username) return;
+  navigator.clipboard.writeText('@' + username).then(() => {
+    const btn = event.target.closest('.btn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i> Copiado';
+    setTimeout(() => { btn.innerHTML = orig; }, 1600);
+  });
+}
+
+function resetAll() {
+  winners = [null, null];
+  show('screen-input');
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('progress-bar2').style.width = '0%';
+}
+
+setInterval(() => {
+  if (input.value.length > 0) updateCounts();
+}, 500);
+</script>
+</body>
+</html>
