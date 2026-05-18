@@ -33,382 +33,116 @@
     align-items: center;
   }
 
-  /* ── LOGO ── */
   .logo-area {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: clamp(1.2rem, 4vw, 2rem);
-    position: relative;
-    z-index: 1;
+    margin-bottom: clamp(1.2rem, 4vw, 1.8rem);
     width: 100%;
   }
-  .logo-area img {
-    width: clamp(100px, 35vw, 160px);
-    height: auto;
-    display: block;
-  }
-  .logo-tagline {
-    font-size: clamp(8px, 2.2vw, 10px);
-    color: #fff;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-family: 'Space Mono', monospace;
-    text-align: center;
-  }
-  .logo-rule { width: 32px; height: 1px; background: #333; margin-top: 0.2rem; }
+  .logo-area img { width: clamp(90px, 30vw, 140px); height: auto; display: block; }
+  .logo-tagline { font-size: clamp(8px, 2.2vw, 10px); color: #fff; letter-spacing: 3px; text-transform: uppercase; text-align: center; }
+  .logo-rule { width: 32px; height: 1px; background: #ffffff; margin-top: 0.2rem; }
 
   /* ── TABS ── */
-  .tabs {
-    display: flex;
-    width: 100%;
-    border: 1px solid #222;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: clamp(1rem, 4vw, 1.5rem);
-  }
-  .tab-btn {
-    flex: 1;
-    background: transparent;
-    color: #ffffff;
-    border: none;
-    padding: 10px 4px;
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(9px, 2.5vw, 11px);
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: background 0.15s, color 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
+  .tabs { display: flex; width: 100%; border: 1px solid #222; border-radius: 8px; overflow: hidden; margin-bottom: clamp(1rem, 4vw, 1.4rem); }
+  .tab-btn { flex: 1; background: transparent; color: #ffffff; border: none; padding: 10px 4px; font-family: 'Space Mono', monospace; font-size: clamp(9px, 2.5vw, 11px); cursor: pointer; letter-spacing: 1px; transition: background 0.15s, color 0.15s; display: flex; align-items: center; justify-content: center; gap: 5px; }
   .tab-btn + .tab-btn { border-left: 1px solid #222; }
   .tab-btn.active { background: #fff; color: #000; font-weight: 700; }
-  .tab-btn i { font-size: 14px; }
-
-  .tab-panel { display: none; width: 100%; flex-direction: column; gap: 1rem; }
+  .tab-btn i { font-size: 13px; }
+  .tab-panel { display: none; width: 100%; flex-direction: column; gap: 0.9rem; }
   .tab-panel.active { display: flex; }
 
-  /* ── SCREEN TITLE ── */
-  .screen-title { text-align: center; width: 100%; margin-bottom: 0.4rem; }
-  .subtitle {
-    font-size: clamp(9px, 2.5vw, 10px);
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 0.3rem;
-  }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.4rem, 6vw, 1.9rem);
-    font-weight: 900;
-    letter-spacing: -1px;
-    color: #fff;
-  }
+  .screen-title { text-align: center; width: 100%; margin-bottom: 0.3rem; }
+  .subtitle { font-size: clamp(9px, 2.5vw, 10px); color: #ffffff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 0.3rem; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.4rem, 6vw, 1.9rem); font-weight: 900; letter-spacing: -1px; color: #fff; }
 
-  /* ── INPUTS ── */
-  input[type="text"],
-  input[type="number"],
-  input[type="date"] {
-    width: 100%;
-    background: #0d0d0d;
-    border: 1px solid #282828;
-    border-radius: 8px;
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(11px, 3vw, 13px);
-    padding: 11px 14px;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
+  input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%; background: #0d0d0d; border: 1px solid #282828; border-radius: 8px;
+    color: #fff; font-family: 'Space Mono', monospace; font-size: clamp(11px, 3vw, 13px);
+    padding: 11px 14px; outline: none; transition: border-color 0.2s; -webkit-appearance: none;
   }
   input:focus { border-color: #ffffff; }
   input::placeholder { color: #ffffff; }
 
-  /* ── ADD ROW ── */
   .add-row { display: flex; gap: 8px; width: 100%; }
   .add-row input { flex: 1; }
 
-  /* ── BUTTONS ── */
-  .btn {
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 6px;
-    padding: clamp(10px, 3vw, 12px) clamp(16px, 5vw, 28px);
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(10px, 2.8vw, 12px);
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: background 0.15s, transform 0.1s;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    -webkit-tap-highlight-color: transparent;
-  }
+  .btn { background: #fff; color: #000; border: none; border-radius: 6px; padding: clamp(10px,3vw,12px) clamp(16px,5vw,28px); font-family: 'Space Mono', monospace; font-size: clamp(10px,2.8vw,12px); font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: background 0.15s, transform 0.1s; display: flex; align-items: center; gap: 7px; -webkit-tap-highlight-color: transparent; }
   .btn:hover { background: #e8e8e8; }
   .btn:active { transform: scale(0.97); }
-  .btn.ghost {
-    background: transparent;
-    color: #aaa;
-    border: 1px solid #2a2a2a;
-  }
+  .btn.ghost { background: transparent; color: #aaa; border: 1px solid #2a2a2a; }
   .btn.ghost:hover { border-color: #ffffff; color: #fff; }
-  .btn.danger {
-    background: transparent;
-    color: #ff4444;
-    border: 1px solid #3a1a1a;
-    font-size: clamp(9px, 2.5vw, 11px);
-  }
+  .btn.danger { background: transparent; color: #ff4444; border: 1px solid #3a1a1a; font-size: clamp(9px,2.5vw,11px); }
   .btn.danger:hover { background: #1a0505; }
 
-  /* ── MEMBERS LIST ── */
-  .members-list { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-  .member-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    background: #0a0a0a;
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-  }
-  .member-num {
-    font-size: 11px;
-    color: #ffffff;
-    width: 20px;
-    flex-shrink: 0;
-    text-align: right;
-  }
-  .member-name { flex: 1; font-size: clamp(12px, 3vw, 14px); color: #fff; }
-  .member-del {
-    background: none;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 2px;
-    line-height: 1;
-    transition: color 0.15s;
-  }
+  .members-list { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+  .member-item { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 8px; }
+  .member-num { font-size: 11px; color: #ffffff; width: 20px; flex-shrink: 0; text-align: right; }
+  .member-name { flex: 1; font-size: clamp(12px,3vw,14px); color: #fff; }
+  .member-del { background: none; border: none; color: #ffffff; cursor: pointer; font-size: 16px; padding: 2px; line-height: 1; transition: color 0.15s; }
   .member-del:hover { color: #ff4444; }
 
-  /* ── STAT CHIPS ── */
-  .chips-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    width: 100%;
-  }
-  .stat-chip {
-    background: #0d0d0d;
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-    padding: clamp(8px, 2.5vw, 12px) clamp(8px, 2.5vw, 12px);
-  }
-  .stat-chip-label {
-    font-size: clamp(8px, 2vw, 9px);
-    color: #ffffff;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .stat-chip-value {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(15px, 4.5vw, 20px);
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: -1px;
-    line-height: 1;
-  }
+  .chips-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; width: 100%; }
+  .stat-chip { background: #0d0d0d; border: 1px solid #1e1e1e; border-radius: 8px; padding: clamp(8px,2.5vw,12px); }
+  .stat-chip-label { font-size: clamp(8px,2vw,9px); color: #ffffff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+  .stat-chip-value { font-family: 'Syne', sans-serif; font-size: clamp(15px,4.5vw,20px); font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1; }
 
   /* ── DRUM ── */
-  .drum-wrap {
-    width: 100%;
-    height: clamp(180px, 45vw, 220px);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #1e1e1e;
-    border-radius: 10px;
-    background: #060606;
-  }
-  .drum-wrap::before, .drum-wrap::after {
-    content: '';
-    position: absolute;
-    left: 0; right: 0;
-    height: 35%;
-    z-index: 2;
-    pointer-events: none;
-  }
+  .drum-wrap { width: 100%; height: clamp(200px, 48vw, 240px); position: relative; overflow: hidden; border: 1px solid #1e1e1e; border-radius: 10px; background: #060606; }
+  .drum-wrap::before, .drum-wrap::after { content: ''; position: absolute; left: 0; right: 0; height: 38%; z-index: 2; pointer-events: none; }
   .drum-wrap::before { top: 0; background: linear-gradient(to bottom, #060606, transparent); }
   .drum-wrap::after  { bottom: 0; background: linear-gradient(to top, #060606, transparent); }
-  .drum-selector {
-    position: absolute;
-    top: 50%; left: 16px; right: 16px;
-    height: 52px;
-    transform: translateY(-50%);
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-    z-index: 3;
-    pointer-events: none;
-  }
-  .drum-track {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    will-change: transform;
-  }
-  .drum-item {
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(11px, 3vw, 13px);
-    font-family: 'Space Mono', monospace;
-    color: #333;
-    padding: 0 1rem;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: color 0.06s;
-  }
-  .drum-item.active { color: #fff; font-weight: 700; font-size: clamp(13px, 4vw, 16px); }
-  .drum-item.near { color: #888; }
+  .drum-selector { position: absolute; top: 50%; left: 16px; right: 16px; height: 52px; transform: translateY(-50%); border-top: 1px solid #ffffff; border-bottom: 1px solid #ffffff; z-index: 3; pointer-events: none; }
+  .drum-track { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
+  .drum-item { height: 52px; display: flex; align-items: center; justify-content: center; font-size: clamp(11px,3vw,14px); font-family: 'Space Mono', monospace; color: #222; padding: 0 1rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 0.06s; }
+  .drum-item.active { color: #fff; font-weight: 700; font-size: clamp(14px,4vw,17px); }
+  .drum-item.near { color: #ffffff; }
 
-  /* ── COUNTER BAR ── */
-  .counter-bar {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: clamp(10px, 2.5vw, 11px);
-    color: #ffffff;
-  }
+  /* Turno badge encima del drum */
+  .turno-badge { text-align: center; font-size: clamp(10px,2.8vw,12px); color: #ffffff; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; width: 100%; }
+  .turno-badge strong { color: #fff; font-family: 'Syne', sans-serif; font-size: clamp(14px,4vw,18px); font-weight: 900; display: block; letter-spacing: -1px; }
+
+  .counter-bar { width: 100%; display: flex; align-items: center; gap: 10px; font-size: clamp(10px,2.5vw,11px); color: #ffffff; }
   .progress-fill { flex: 1; height: 1px; background: #1a1a1a; overflow: hidden; }
-  .progress-inner { height: 100%; background: #fff; transition: width 0.3s; opacity: 0.4; }
+  .progress-inner { height: 100%; background: #fff; transition: width 0.3s; opacity: 0.35; }
 
-  /* ── SORTEO LIST ── */
-  .sorteo-list { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-  .sorteo-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: #0a0a0a;
-    border: 1px solid #1e1e1e;
-    border-radius: 8px;
-    animation: slideIn 0.25s ease forwards;
-    opacity: 0;
-  }
-  .sorteo-item.next-up {
-    border-color: #3a3000;
-    background: #0d0b00;
-  }
+  /* ── RESULTADO ACUMULADO ── */
+  .result-list { display: flex; flex-direction: column; gap: 5px; width: 100%; max-height: 280px; overflow-y: auto; }
+  .result-item { display: flex; align-items: center; gap: 10px; padding: 9px 14px; background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 8px; animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; opacity: 0; }
+  @keyframes popIn { to { opacity: 1; } }
+  .result-num { width: 28px; height: 28px; border-radius: 50%; background: #141414; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #ffffff; flex-shrink: 0; }
+  .result-num.first { background: #2a2000; color: #ffcc00; }
+  .result-name { flex: 1; font-size: clamp(12px,3vw,14px); color: #fff; }
+  .result-date { font-size: clamp(9px,2.2vw,10px); color: #ffffff; background: #111; border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
+  .result-date.first { background: #2a2000; color: #ffcc00; }
+
+  /* ── SORTEO LIST (tab) ── */
+  .sorteo-list { display: flex; flex-direction: column; gap: 5px; width: 100%; }
+  .sorteo-item { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #0a0a0a; border: 1px solid #1e1e1e; border-radius: 8px; animation: slideIn 0.25s ease forwards; opacity: 0; }
+  .sorteo-item.next-up { border-color: #3a3000; background: #0d0b00; }
   @keyframes slideIn { to { opacity: 1; } }
-  .sorteo-num {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: #141414;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 700;
-    color: #ffffff;
-    flex-shrink: 0;
-  }
+  .sorteo-num { width: 28px; height: 28px; border-radius: 50%; background: #141414; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #ffffff; flex-shrink: 0; }
   .sorteo-num.next { background: #2a2000; color: #ffcc00; }
-  .sorteo-name { flex: 1; font-size: clamp(12px, 3vw, 14px); color: #fff; }
-  .sorteo-date {
-    font-size: clamp(9px, 2.2vw, 10px);
-    color: #ffffff;
-    background: #111;
-    border-radius: 6px;
-    padding: 3px 8px;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-  }
+  .sorteo-name { flex: 1; font-size: clamp(12px,3vw,14px); color: #fff; }
+  .sorteo-date { font-size: clamp(9px,2.2vw,10px); color: #ffffff; background: #111; border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
   .sorteo-date.next { background: #2a2000; color: #ffcc00; }
 
-  /* ── WINNER CARD ── */
-  .winner-card {
-    background: #0a0a0a;
-    border: 1px solid #222;
-    border-radius: 14px;
-    padding: clamp(1.2rem, 4vw, 2rem);
-    text-align: center;
-    width: 100%;
-    animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  @keyframes pop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .winner-label {
-    font-size: clamp(9px, 2.5vw, 10px);
-    letter-spacing: 4px;
-    color: #ffffff;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .winner-username {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(1.5rem, 7vw, 2.4rem);
-    font-weight: 900;
-    color: #fff;
-    word-break: break-all;
-    margin-bottom: 0.3rem;
-    letter-spacing: -2px;
-    line-height: 1.1;
-  }
-  .winner-meta {
-    font-size: clamp(10px, 2.5vw, 11px);
-    color: #ffffff;
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
-    letter-spacing: 1px;
-  }
-  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .winners-divider {
-    width: 100%;
-    display: flex; align-items: center; gap: 10px;
-    font-size: 9px; color: #333; letter-spacing: 3px; text-transform: uppercase;
-  }
-  .winners-divider::before, .winners-divider::after {
-    content: ''; flex: 1; height: 1px; background: #1a1a1a;
-  }
-
-  /* ── CONFIG ── */
   .cfg-row { display: flex; flex-direction: column; gap: 6px; width: 100%; }
-  .cfg-label { font-size: clamp(9px, 2.5vw, 11px); color: #ffffff; letter-spacing: 1px; }
-  .cfg-hint { font-size: clamp(9px, 2.2vw, 10px); color: #ffffff; }
+  .cfg-label { font-size: clamp(9px,2.5vw,11px); color: #ffffff; letter-spacing: 1px; }
+  .cfg-hint { font-size: clamp(9px,2.2vw,10px); color: #ffffff; }
 
-  /* ── EMPTY STATE ── */
-  .empty-state { text-align: center; padding: 1.5rem; color: #333; font-size: 12px; width: 100%; }
+  .empty-state { text-align: center; padding: 1.5rem; color: #ffffff; font-size: 12px; width: 100%; }
 
-  /* ── CONFETTI ── */
-  .confetti-dot {
-    position: absolute; width: 4px; height: 4px; border-radius: 50%;
-    pointer-events: none; animation: fall linear forwards;
-  }
+  .confetti-dot { position: absolute; width: 4px; height: 4px; border-radius: 50%; pointer-events: none; animation: fall linear forwards; }
   @keyframes fall { to { transform: translateY(800px) rotate(720deg); opacity: 0; } }
 
-  /* ── FOOTER ── */
-  .footer-strip {
-    margin-top: auto;
-    padding-top: 1.2rem;
-    font-size: clamp(8px, 2vw, 9px);
-    color: #333;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-align: center;
-    width: 100%;
-    border-top: 1px solid #111;
-    display: flex; align-items: center; justify-content: center;
-    gap: 8px; flex-wrap: wrap;
-  }
+  .footer-strip { margin-top: auto; padding-top: 1.2rem; font-size: clamp(8px,2vw,9px); color: #ffffff; letter-spacing: 2px; text-transform: uppercase; text-align: center; width: 100%; border-top: 1px solid #111; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
   .footer-strip i { font-size: 12px; }
   .footer-sep { color: #1e1e1e; }
 
-  /* ── SCREENS ── */
-  .screen { display: none; flex-direction: column; align-items: center; gap: clamp(0.8rem, 3vw, 1.2rem); width: 100%; }
+  .screen { display: none; flex-direction: column; align-items: center; gap: clamp(0.7rem,3vw,1rem); width: 100%; }
   .screen.active { display: flex; }
 </style>
 </head>
@@ -421,88 +155,50 @@
     <div class="logo-rule"></div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       PANTALLA PRINCIPAL — TABS
-  ════════════════════════════════════════ -->
+  <!-- ══════════ MAIN (tabs) ══════════ -->
   <div id="screen-main" class="screen active">
-
     <div class="screen-title">
       <div class="subtitle">ronda de ahorro</div>
       <h1>Pasanaco</h1>
     </div>
 
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('integrantes')" id="tbtn-integrantes">
-        <i class="ti ti-users" aria-hidden="true"></i> Integrantes
-      </button>
-      <button class="tab-btn" onclick="switchTab('sorteo')" id="tbtn-sorteo">
-        <i class="ti ti-shuffle" aria-hidden="true"></i> Sorteo
-      </button>
-      <button class="tab-btn" onclick="switchTab('config')" id="tbtn-config">
-        <i class="ti ti-settings" aria-hidden="true"></i> Config
-      </button>
+      <button class="tab-btn active" onclick="switchTab('integrantes')" id="tbtn-integrantes"><i class="ti ti-users" aria-hidden="true"></i> Integrantes</button>
+      <button class="tab-btn" onclick="switchTab('sorteo')" id="tbtn-sorteo"><i class="ti ti-list-numbers" aria-hidden="true"></i> Orden</button>
+      <button class="tab-btn" onclick="switchTab('config')" id="tbtn-config"><i class="ti ti-settings" aria-hidden="true"></i> Config</button>
     </div>
 
-    <!-- TAB: INTEGRANTES -->
+    <!-- TAB INTEGRANTES -->
     <div id="tab-integrantes" class="tab-panel active">
       <div class="add-row">
-        <input type="text" id="new-name" placeholder="Nombre del integrante..." maxlength="40"
-               onkeydown="if(event.key==='Enter')addMember()">
-        <button class="btn" onclick="addMember()">
-          <i class="ti ti-plus" aria-hidden="true"></i> Agregar
-        </button>
+        <input type="text" id="new-name" placeholder="Nombre del integrante..." maxlength="40" onkeydown="if(event.key==='Enter')addMember()">
+        <button class="btn" onclick="addMember()"><i class="ti ti-plus" aria-hidden="true"></i> Agregar</button>
       </div>
       <div class="members-list" id="members-list"></div>
       <div id="empty-members" class="empty-state">Agregá los integrantes del pasanaco</div>
     </div>
 
-    <!-- TAB: SORTEO -->
+    <!-- TAB ORDEN -->
     <div id="tab-sorteo" class="tab-panel">
       <div class="chips-row">
-        <div class="stat-chip">
-          <div class="stat-chip-label">Integrantes</div>
-          <div class="stat-chip-value" id="stat-n">0</div>
-        </div>
-        <div class="stat-chip">
-          <div class="stat-chip-label">Aporte</div>
-          <div class="stat-chip-value" id="stat-aporte">—</div>
-        </div>
-        <div class="stat-chip">
-          <div class="stat-chip-label">Pozo</div>
-          <div class="stat-chip-value" id="stat-pozo">—</div>
-        </div>
+        <div class="stat-chip"><div class="stat-chip-label">Integrantes</div><div class="stat-chip-value" id="stat-n">0</div></div>
+        <div class="stat-chip"><div class="stat-chip-label">Aporte</div><div class="stat-chip-value" id="stat-aporte">—</div></div>
+        <div class="stat-chip"><div class="stat-chip-label">Pozo</div><div class="stat-chip-value" id="stat-pozo">—</div></div>
       </div>
 
       <div style="display:flex;gap:8px;width:100%">
-        <button class="btn" onclick="sortear()" style="flex:1">
-          <i class="ti ti-shuffle" aria-hidden="true"></i> Sortear orden
-        </button>
-        <button class="btn ghost" id="btn-copiar" onclick="copiarLista()" style="display:none">
-          <i class="ti ti-copy" aria-hidden="true"></i>
-        </button>
+        <button class="btn" onclick="startRuleta()" style="flex:1"><i class="ti ti-player-play" aria-hidden="true"></i> Sortear con ruleta</button>
+        <button class="btn ghost" id="btn-copiar" onclick="copiarLista()" style="display:none"><i class="ti ti-copy" aria-hidden="true"></i></button>
       </div>
 
-      <div id="sorteo-info" style="display:none;font-size:10px;color:#ffffff;letter-spacing:1px;width:100%;text-align:center;">
-        Transferencia cada sábado 23 al pozo · el turno cobra el lunes
-      </div>
-
+      <div id="sorteo-hint" style="display:none;font-size:10px;color:#ffffff;letter-spacing:1px;width:100%;text-align:center;">sábado 23 · transferencia al pozo</div>
       <div class="sorteo-list" id="sorteo-list"></div>
-      <div id="empty-sorteo" class="empty-state">
-        <i class="ti ti-list-numbers" style="font-size:24px;display:block;margin-bottom:8px;opacity:0.3" aria-hidden="true"></i>
-        Presioná "Sortear orden" para asignar los turnos
-      </div>
-
-      <button class="btn ghost" id="btn-iniciar-sorteo" onclick="iniciarSorteoAnimado()" style="display:none;width:100%">
-        <i class="ti ti-player-play" aria-hidden="true"></i> Sorteo animado para video
-      </button>
+      <div id="empty-sorteo" class="empty-state"><i class="ti ti-shuffle" style="font-size:22px;display:block;margin-bottom:8px;opacity:0.25" aria-hidden="true"></i>Presioná "Sortear con ruleta" para asignar los turnos</div>
     </div>
 
-    <!-- TAB: CONFIG -->
+    <!-- TAB CONFIG -->
     <div id="tab-config" class="tab-panel">
-      <div class="cfg-row">
-        <div class="cfg-label">Nombre del pasanaco</div>
-        <input type="text" id="cfg-nombre" placeholder="Ej: Pasanaco 2025" maxlength="60" oninput="saveConfig()">
-      </div>
+      <div class="cfg-row"><div class="cfg-label">Nombre del pasanaco</div><input type="text" id="cfg-nombre" placeholder="Ej: Pasanaco 2025" maxlength="60" oninput="saveConfig()"></div>
       <div class="cfg-row">
         <div class="cfg-label">Aporte semanal por persona ($)</div>
         <input type="number" id="cfg-aporte" placeholder="Ej: 5000" min="0" oninput="saveConfig()">
@@ -511,60 +207,50 @@
       <div class="cfg-row">
         <div class="cfg-label">Fecha del primer sábado 23</div>
         <input type="date" id="cfg-fecha" oninput="saveConfig()">
-        <div class="cfg-hint">Elegí el sábado en que se hace la primera transferencia al pozo</div>
+        <div class="cfg-hint">Primera transferencia al pozo</div>
       </div>
-      <div style="margin-top:0.5rem">
-        <button class="btn danger" onclick="resetAll()">
-          <i class="ti ti-trash" aria-hidden="true"></i> Borrar todo
-        </button>
-      </div>
+      <div style="margin-top:0.5rem"><button class="btn danger" onclick="resetAll()"><i class="ti ti-trash" aria-hidden="true"></i> Borrar todo</button></div>
     </div>
+  </div>
 
-  </div><!-- /screen-main -->
-
-  <!-- ════════════════════════════════════════
-       PANTALLA: SORTEO ANIMADO (VIDEO)
-  ════════════════════════════════════════ -->
+  <!-- ══════════ RULETA ══════════ -->
   <div id="screen-spin" class="screen">
     <div class="screen-title">
-      <div class="subtitle">sorteando orden</div>
-      <h1 id="spin-count">0 integrantes</h1>
+      <div class="subtitle">sorteando turno</div>
     </div>
+
+    <div class="turno-badge">
+      turno
+      <strong id="turno-label">1</strong>
+    </div>
+
     <div class="drum-wrap">
       <div class="drum-selector"></div>
       <div id="drum-track" class="drum-track"></div>
     </div>
+
     <div class="counter-bar">
       <i class="ti ti-loader" aria-hidden="true"></i>
       <span id="spin-status">Sorteando...</span>
       <div class="progress-fill"><div class="progress-inner" id="progress-bar" style="width:0%"></div></div>
+      <span id="spin-counter" style="font-size:10px;color:#ffffff;white-space:nowrap"></span>
     </div>
+
+    <!-- Lista acumulada de ya sorteados -->
+    <div id="result-list" class="result-list"></div>
   </div>
 
-  <!-- ════════════════════════════════════════
-       PANTALLA: RESULTADO ANIMADO
-  ════════════════════════════════════════ -->
-  <div id="screen-result" class="screen">
+  <!-- ══════════ PANTALLA FINAL ══════════ -->
+  <div id="screen-done" class="screen">
     <div class="screen-title">
-      <div class="subtitle">orden sorteado</div>
-      <h1 id="result-title">el orden es...</h1>
+      <div class="subtitle">orden final</div>
+      <h1 id="done-title">listo!</h1>
     </div>
-    <div class="winner-card">
-      <div class="winner-label">
-        <i class="ti ti-list-numbers" aria-hidden="true"></i>
-        turno 1 — primer cobro
-      </div>
-      <div class="winner-username" id="result-first">@nombre</div>
-      <div class="winner-meta" id="result-meta">pasanaco devhub</div>
-      <div class="btn-row">
-        <button class="btn" onclick="copiarLista()">
-          <i class="ti ti-copy" aria-hidden="true"></i> Copiar lista
-        </button>
-        <button class="btn ghost" onclick="volverMain()">
-          <i class="ti ti-arrow-left" aria-hidden="true"></i> Ver todos
-        </button>
-      </div>
+    <div style="display:flex;gap:8px;width:100%">
+      <button class="btn" onclick="copiarLista()" style="flex:1"><i class="ti ti-copy" aria-hidden="true"></i> Copiar lista</button>
+      <button class="btn ghost" onclick="verOrden()"><i class="ti ti-list-numbers" aria-hidden="true"></i> Ver orden</button>
     </div>
+    <div class="result-list" id="done-list" style="max-height:none"></div>
   </div>
 
   <div class="footer-strip">
@@ -574,229 +260,147 @@
     <i class="ti ti-brand-instagram" aria-hidden="true"></i>
     devhub.arg
   </div>
-
-</div><!-- /app -->
+</div>
 
 <script>
-// ─── Storage ────────────────────────────────────────────────────────────────
-const KEY = 'pasanaco_devhub_v1';
-let state = { members: [], sorteo: [], config: { nombre: '', aporte: '', fecha: '' } };
+const KEY = 'pasanaco_devhub_v2';
+let state = { members: [], sorteo: [], config: { nombre:'', aporte:'', fecha:'' } };
 
 function load() {
   try { const r = localStorage.getItem(KEY); if (r) state = JSON.parse(r); } catch(_) {}
   renderAll();
 }
-function save() {
-  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(_) {}
-}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(_) {} }
 
-// ─── Pantallas ───────────────────────────────────────────────────────────────
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
-function volverMain() {
-  showScreen('screen-main');
-  switchTab('sorteo');
-}
 
-// ─── Tabs ────────────────────────────────────────────────────────────────────
 function switchTab(tab) {
   ['integrantes','sorteo','config'].forEach(t => {
-    document.getElementById('tbtn-' + t).classList.toggle('active', t === tab);
-    document.getElementById('tab-' + t).classList.toggle('active', t === tab);
+    document.getElementById('tbtn-'+t).classList.toggle('active', t===tab);
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
   });
-  if (tab === 'sorteo') renderSorteo();
+  if (tab==='sorteo') renderSorteo();
 }
 
-// ─── Integrantes ─────────────────────────────────────────────────────────────
+// ── Integrantes ────────────────────────────────────────────────────────────
 function addMember() {
   const inp = document.getElementById('new-name');
   const name = inp.value.trim();
   if (!name) return;
-  if (state.members.map(m=>m.toLowerCase()).includes(name.toLowerCase())) {
-    alert('Ese nombre ya está en la lista.');
-    return;
-  }
+  if (state.members.map(m=>m.toLowerCase()).includes(name.toLowerCase())) { alert('Ese nombre ya está.'); return; }
   state.members.push(name);
   state.sorteo = [];
-  save();
-  inp.value = '';
-  renderMembers();
+  save(); inp.value = ''; renderMembers();
 }
-
-function removeMember(i) {
-  state.members.splice(i, 1);
-  state.sorteo = [];
-  save();
-  renderMembers();
-}
-
+function removeMember(i) { state.members.splice(i,1); state.sorteo=[]; save(); renderMembers(); }
 function renderMembers() {
-  const list = document.getElementById('members-list');
-  const empty = document.getElementById('empty-members');
-  list.innerHTML = '';
-  empty.style.display = state.members.length ? 'none' : '';
-  state.members.forEach((name, i) => {
-    const el = document.createElement('div');
-    el.className = 'member-item';
-    el.innerHTML = `
-      <span class="member-num">${i + 1}</span>
-      <span class="member-name">${name}</span>
-      <button class="member-del" onclick="removeMember(${i})" aria-label="Eliminar">
-        <i class="ti ti-x" aria-hidden="true"></i>
-      </button>`;
+  const list=document.getElementById('members-list'), empty=document.getElementById('empty-members');
+  list.innerHTML=''; empty.style.display=state.members.length?'none':'';
+  state.members.forEach((name,i)=>{
+    const el=document.createElement('div'); el.className='member-item';
+    el.innerHTML=`<span class="member-num">${i+1}</span><span class="member-name">${name}</span>
+      <button class="member-del" onclick="removeMember(${i})" aria-label="Eliminar"><i class="ti ti-x" aria-hidden="true"></i></button>`;
     list.appendChild(el);
   });
 }
 
-// ─── Fechas (sábado 23 base + N semanas) ─────────────────────────────────────
-function getTurnoDate(baseDate, weekOffset) {
-  const d = new Date(baseDate);
-  d.setDate(d.getDate() + weekOffset * 7);
-  return d;
+// ── Fechas ─────────────────────────────────────────────────────────────────
+function getTurnoDate(base,offset) { const d=new Date(base); d.setDate(d.getDate()+offset*7); return d; }
+function fmtFecha(d) { return d.toLocaleDateString('es-AR',{weekday:'short',day:'numeric',month:'short'}); }
+function isUpcoming(d) { const h=new Date(); h.setHours(0,0,0,0); const t=new Date(d); t.setHours(0,0,0,0); return t>=h; }
+function fmt(n) { return Number(n).toLocaleString('es-AR'); }
+
+// ── Config ─────────────────────────────────────────────────────────────────
+function saveConfig() {
+  state.config.nombre=document.getElementById('cfg-nombre').value;
+  state.config.aporte=document.getElementById('cfg-aporte').value;
+  state.config.fecha =document.getElementById('cfg-fecha').value;
+  const n=state.members.length, a=Number(state.config.aporte)||0;
+  document.getElementById('cfg-pozo-preview').textContent=fmt(a*n);
+  save();
 }
 
-function formatFecha(d) {
-  return d.toLocaleDateString('es-AR', { weekday: 'short', day: 'numeric', month: 'short' });
+// ── Sorteo list (tab) ──────────────────────────────────────────────────────
+function renderSorteo() {
+  const list=document.getElementById('sorteo-list'), empty=document.getElementById('empty-sorteo');
+  const hint=document.getElementById('sorteo-hint'), btnCop=document.getElementById('btn-copiar');
+  const n=state.members.length, a=Number(state.config.aporte)||0, pozo=a*n;
+  const base=state.config.fecha?new Date(state.config.fecha+'T12:00:00'):null;
+  document.getElementById('stat-n').textContent=n;
+  document.getElementById('stat-aporte').textContent=a?'$'+fmt(a):'—';
+  document.getElementById('stat-pozo').textContent=pozo?'$'+fmt(pozo):'—';
+  list.innerHTML='';
+  if (!state.sorteo.length) { empty.style.display=''; hint.style.display='none'; btnCop.style.display='none'; return; }
+  empty.style.display='none'; hint.style.display=''; btnCop.style.display='';
+  let nextIdx=-1;
+  if (base) for (let i=0;i<state.sorteo.length;i++) { if (isUpcoming(getTurnoDate(base,i))) { nextIdx=i; break; } }
+  state.sorteo.forEach((name,i)=>{
+    const el=document.createElement('div');
+    const isNext=i===nextIdx;
+    el.className='sorteo-item'+(isNext?' next-up':'');
+    el.style.animationDelay=(i*35)+'ms';
+    const dateStr=base?fmtFecha(getTurnoDate(base,i)):'Semana '+(i+1);
+    const pStr=pozo?' · $'+fmt(pozo):'';
+    el.innerHTML=`<div class="sorteo-num${isNext?' next':''}">${i+1}</div>
+      <span class="sorteo-name">${name}${isNext?' <span style="font-size:9px;color:#ffcc00;letter-spacing:1px">← próximo</span>':''}</span>
+      <span class="sorteo-date${isNext?' next':''}">${dateStr}${pStr}</span>`;
+    list.appendChild(el);
+  });
 }
 
-function isUpcoming(d) {
-  const hoy = new Date(); hoy.setHours(0,0,0,0);
-  const t = new Date(d); t.setHours(0,0,0,0);
-  return t >= hoy;
-}
+// ── RULETA ─────────────────────────────────────────────────────────────────
+let spinQueue = [];   // nombres pendientes de sortear en orden
+let spinResults = []; // { turno, name } ya sorteados
+let spinPool = [];    // pool de nombres aún no asignados
 
-// ─── Sorteo ──────────────────────────────────────────────────────────────────
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+  const a=[...arr];
+  for (let i=a.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
 
-function sortear() {
+function startRuleta() {
   if (state.members.length < 2) { alert('Agregá al menos 2 integrantes.'); return; }
-  state.sorteo = shuffle(state.members);
-  save();
-  renderSorteo();
-}
-
-function renderSorteo() {
-  const list    = document.getElementById('sorteo-list');
-  const empty   = document.getElementById('empty-sorteo');
-  const info    = document.getElementById('sorteo-info');
-  const btnCop  = document.getElementById('btn-copiar');
-  const btnAnim = document.getElementById('btn-iniciar-sorteo');
-
-  const n      = state.members.length;
-  const aporte = Number(state.config.aporte) || 0;
-  const pozo   = aporte * n;
-  const base   = state.config.fecha ? new Date(state.config.fecha + 'T12:00:00') : null;
-
-  document.getElementById('stat-n').textContent     = n;
-  document.getElementById('stat-aporte').textContent = aporte ? '$' + fmt(aporte) : '—';
-  document.getElementById('stat-pozo').textContent   = pozo   ? '$' + fmt(pozo)   : '—';
-
-  list.innerHTML = '';
-
-  if (!state.sorteo.length) {
-    empty.style.display  = '';
-    info.style.display   = 'none';
-    btnCop.style.display = 'none';
-    btnAnim.style.display = '';
-    return;
-  }
-
-  empty.style.display   = 'none';
-  info.style.display    = '';
-  btnCop.style.display  = '';
-  btnAnim.style.display = '';
-
-  // Próximo turno pendiente
-  let nextIdx = -1;
-  if (base) {
-    for (let i = 0; i < state.sorteo.length; i++) {
-      if (isUpcoming(getTurnoDate(base, i))) { nextIdx = i; break; }
-    }
-  }
-
-  state.sorteo.forEach((name, i) => {
-    const el = document.createElement('div');
-    const isNext = i === nextIdx;
-    el.className = 'sorteo-item' + (isNext ? ' next-up' : '');
-    el.style.animationDelay = (i * 40) + 'ms';
-
-    const dateStr = base ? formatFecha(getTurnoDate(base, i)) : 'Semana ' + (i + 1);
-    const pozoBadge = pozo ? ' · $' + fmt(pozo) : '';
-
-    el.innerHTML = `
-      <div class="sorteo-num${isNext ? ' next' : ''}">${i + 1}</div>
-      <span class="sorteo-name">${name}${isNext ? ' <span style="font-size:9px;color:#ffcc00;letter-spacing:1px">← próximo</span>' : ''}</span>
-      <span class="sorteo-date${isNext ? ' next' : ''}">${dateStr}${pozoBadge}</span>`;
-    list.appendChild(el);
-  });
-}
-
-// ─── Config ──────────────────────────────────────────────────────────────────
-function saveConfig() {
-  state.config.nombre = document.getElementById('cfg-nombre').value;
-  state.config.aporte = document.getElementById('cfg-aporte').value;
-  state.config.fecha  = document.getElementById('cfg-fecha').value;
-  const n = state.members.length;
-  const aporte = Number(state.config.aporte) || 0;
-  document.getElementById('cfg-pozo-preview').textContent = fmt(aporte * n);
-  save();
-}
-
-// ─── Copiar lista ─────────────────────────────────────────────────────────────
-function copiarLista() {
-  if (!state.sorteo.length) return;
-  const aporte = Number(state.config.aporte) || 0;
-  const n = state.members.length;
-  const pozo = aporte * n;
-  const base = state.config.fecha ? new Date(state.config.fecha + 'T12:00:00') : null;
-  const nombre = state.config.nombre || 'Pasanaco';
-  let txt = nombre + '\n' + '─'.repeat(34) + '\n';
-  if (aporte) txt += `Aporte: $${fmt(aporte)}/semana · Pozo: $${fmt(pozo)}\n`;
-  txt += 'Transferencia cada sábado 23\n' + '─'.repeat(34) + '\n';
-  state.sorteo.forEach((name, i) => {
-    const fecha = base ? formatFecha(getTurnoDate(base, i)) : 'Semana ' + (i + 1);
-    txt += `${i + 1}. ${name} — ${fecha}\n`;
-  });
-  navigator.clipboard.writeText(txt).then(() => {
-    // feedback visual breve
-    const btn = document.getElementById('btn-copiar');
-    const orig = btn.innerHTML;
-    btn.innerHTML = '<i class="ti ti-check" aria-hidden="true"></i>';
-    setTimeout(() => { btn.innerHTML = orig; }, 1500);
-  });
-}
-
-// ─── Sorteo animado (para grabar en video) ────────────────────────────────────
-function iniciarSorteoAnimado() {
-  if (state.members.length < 2) { alert('Agregá al menos 2 integrantes.'); return; }
-
-  // Sortear primero
-  state.sorteo = shuffle(state.members);
+  // Calcular orden completo de antemano
+  const orden = shuffle(state.members);
+  state.sorteo = orden;
   save();
 
+  spinResults = [];
+  spinQueue = [...orden]; // sortearemos de izquierda a derecha
+  spinPool = [...orden];  // pool para la ruleta (se elimina conforme se asigna)
+
+  document.getElementById('result-list').innerHTML = '';
   showScreen('screen-spin');
-  document.getElementById('spin-count').textContent = state.members.length + ' integrantes';
+  spinNext();
+}
 
-  const ITEM_H      = 52;
-  const CONTAINER_H = document.querySelector('.drum-wrap').offsetHeight;
-  const CENTER      = (CONTAINER_H - ITEM_H) / 2;
+function spinNext() {
+  if (spinQueue.length === 0) { finalizarSorteo(); return; }
 
-  // Construir track extendido terminando en el turno 1
-  const winner   = state.sorteo[0];
-  const shuffled = [...state.members].sort(() => Math.random() - 0.5);
-  const REPEATS  = 10;
+  const turnoNum = spinResults.length + 1;
+  const winner   = spinQueue.shift(); // el ganador ya está decidido
+  const poolLeft = [...spinPool];     // nombres que aún aparecen en la ruleta
+
+  document.getElementById('turno-label').textContent = turnoNum;
+  document.getElementById('spin-counter').textContent = turnoNum + '/' + state.members.length;
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('spin-status').textContent = 'Sorteando...';
+
+  const ITEM_H = 52;
+  const drumWrap = document.querySelector('.drum-wrap');
+  const CONTAINER_H = drumWrap.offsetHeight;
+  const CENTER = (CONTAINER_H - ITEM_H) / 2;
+
+  // Construir track extendido que termina en el ganador
+  const shuffledPool = shuffle(poolLeft);
+  const REPEATS = Math.max(6, Math.ceil(80 / poolLeft.length)); // más vueltas si hay pocos
   const extended = [];
-  for (let r = 0; r < REPEATS; r++) shuffled.forEach(p => extended.push(p));
-  const insertAt = extended.length - 4;
+  for (let r = 0; r < REPEATS; r++) shuffledPool.forEach(p => extended.push(p));
+  const insertAt = extended.length - 3;
   extended[insertAt] = winner;
 
   const track = document.getElementById('drum-track');
@@ -807,16 +411,20 @@ function iniciarSorteoAnimado() {
     div.textContent = name;
     track.appendChild(div);
   });
-
   track.style.transition = 'none';
-  track.style.transform  = 'translateY(0px)';
-  document.getElementById('progress-bar').style.width = '0%';
+  track.style.transform = 'translateY(0px)';
 
   const finalPos = insertAt * ITEM_H - CENTER;
-  const DURATION = 7000;
-  const start    = performance.now();
 
-  function easeOut(t) { return 1 - Math.pow(1 - t, 5); }
+  // Duración: más rápido en los últimos turnos (más dramático al inicio)
+  const totalTurnos = state.members.length;
+  const baseDur = 5000;
+  const minDur  = 2200;
+  const DURATION = Math.max(minDur, baseDur - (spinResults.length * (baseDur - minDur) / totalTurnos));
+
+  const start = performance.now();
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
 
   function animate(now) {
     const t = Math.min((now - start) / DURATION, 1);
@@ -832,66 +440,132 @@ function iniciarSorteoAnimado() {
 
     document.getElementById('progress-bar').style.width = (t * 100) + '%';
     document.getElementById('spin-status').textContent =
-      t < 0.5 ? 'Sorteando...' : t < 0.85 ? 'Desacelerando...' : 'Eligiendo turno 1...';
+      t < 0.5 ? 'Sorteando...' : t < 0.88 ? 'Desacelerando...' : 'Eligiendo...';
 
     if (t < 1) { requestAnimationFrame(animate); return; }
 
-    // Mostrar resultado
-    setTimeout(() => {
-      const n      = state.members.length;
-      const aporte = Number(state.config.aporte) || 0;
-      const base   = state.config.fecha ? new Date(state.config.fecha + 'T12:00:00') : null;
-      const fecha  = base ? formatFecha(getTurnoDate(base, 0)) : 'Semana 1';
+    // Ganador elegido — remover del pool
+    spinPool = spinPool.filter(p => p !== winner);
+    spinResults.push({ turno: turnoNum, name: winner });
 
-      document.getElementById('result-first').textContent = winner;
-      document.getElementById('result-meta').textContent  =
-        `turno 1 · ${fecha}${aporte ? ' · $' + fmt(aporte * n) : ''} · ${n} integrantes`;
+    // Agregar a lista acumulada con animación
+    agregarResultado(turnoNum, winner);
 
-      showScreen('screen-result');
-      launchConfetti();
-    }, 500);
+    // Pausa antes del siguiente turno
+    const pausa = spinQueue.length === 0 ? 1000 : 900;
+    setTimeout(spinNext, pausa);
   }
 
   requestAnimationFrame(animate);
 }
 
-// ─── Confetti ─────────────────────────────────────────────────────────────────
-function launchConfetti() {
-  const colors = ['#fff','#bbb','#888','#ffffff','#ffcc00'];
-  const app = document.getElementById('app');
-  for (let i = 0; i < 50; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'confetti-dot';
-    dot.style.left = Math.random() * 100 + '%';
-    dot.style.top  = '-10px';
-    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
-    dot.style.animationDuration = (2 + Math.random() * 2.5) + 's';
-    dot.style.animationDelay   = (Math.random() * 0.8) + 's';
-    app.appendChild(dot);
-    setTimeout(() => dot.remove(), 5000);
+function agregarResultado(turno, name) {
+  const list = document.getElementById('result-list');
+  const a = Number(state.config.aporte) || 0;
+  const n = state.members.length;
+  const pozo = a * n;
+  const base = state.config.fecha ? new Date(state.config.fecha + 'T12:00:00') : null;
+  const dateStr = base ? fmtFecha(getTurnoDate(base, turno - 1)) : 'Semana ' + turno;
+  const pStr = pozo ? ' · $' + fmt(pozo) : '';
+  const isFirst = turno === 1;
+
+  const el = document.createElement('div');
+  el.className = 'result-item';
+  el.style.animationDelay = '0ms';
+  el.innerHTML = `
+    <div class="result-num${isFirst?' first':''}">${turno}</div>
+    <span class="result-name">${name}</span>
+    <span class="result-date${isFirst?' first':''}">${dateStr}${pStr}</span>`;
+  list.appendChild(el);
+
+  // Confetti solo para turno 1
+  if (isFirst) launchConfetti(12);
+}
+
+function finalizarSorteo() {
+  const n = state.members.length;
+  document.getElementById('done-title').textContent = n + ' turnos sorteados';
+
+  const doneList = document.getElementById('done-list');
+  doneList.innerHTML = '';
+  const a = Number(state.config.aporte) || 0;
+  const pozo = a * n;
+  const base = state.config.fecha ? new Date(state.config.fecha + 'T12:00:00') : null;
+
+  let nextIdx = -1;
+  if (base) for (let i=0; i<state.sorteo.length; i++) { if (isUpcoming(getTurnoDate(base,i))) { nextIdx=i; break; } }
+
+  state.sorteo.forEach((name, i) => {
+    const isNext = i === nextIdx;
+    const dateStr = base ? fmtFecha(getTurnoDate(base, i)) : 'Semana ' + (i+1);
+    const pStr = pozo ? ' · $' + fmt(pozo) : '';
+    const el = document.createElement('div');
+    el.className = 'result-item' + (isNext ? ' next-up' : '');
+    el.style.animationDelay = (i * 40) + 'ms';
+    el.innerHTML = `
+      <div class="result-num${i===0?' first':''}">${i+1}</div>
+      <span class="result-name">${name}${isNext?' <span style="font-size:9px;color:#ffcc00;letter-spacing:1px">← próximo</span>':''}</span>
+      <span class="result-date${i===0?' first':''}">${dateStr}${pStr}</span>`;
+    doneList.appendChild(el);
+  });
+
+  showScreen('screen-done');
+  launchConfetti(40);
+}
+
+function verOrden() {
+  showScreen('screen-main');
+  switchTab('sorteo');
+}
+
+// ── Copiar ─────────────────────────────────────────────────────────────────
+function copiarLista() {
+  if (!state.sorteo.length) return;
+  const a=Number(state.config.aporte)||0, n=state.members.length, pozo=a*n;
+  const base=state.config.fecha?new Date(state.config.fecha+'T12:00:00'):null;
+  const nombre=state.config.nombre||'Pasanaco';
+  let txt=nombre+'\n'+'─'.repeat(34)+'\n';
+  if (a) txt+=`Aporte: $${fmt(a)}/semana · Pozo: $${fmt(pozo)}\n`;
+  txt+='Transferencia cada sábado 23\n'+'─'.repeat(34)+'\n';
+  state.sorteo.forEach((name,i)=>{
+    const fecha=base?fmtFecha(getTurnoDate(base,i)):'Semana '+(i+1);
+    txt+=`${i+1}. ${name} — ${fecha}\n`;
+  });
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btns=document.querySelectorAll('#btn-copiar');
+    btns.forEach(btn=>{ const o=btn.innerHTML; btn.innerHTML='<i class="ti ti-check" aria-hidden="true"></i>'; setTimeout(()=>btn.innerHTML=o,1500); });
+  });
+}
+
+// ── Reset ──────────────────────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm('¿Borrar todo el pasanaco?')) return;
+  state={members:[],sorteo:[],config:{nombre:'',aporte:'',fecha:''}};
+  save(); showScreen('screen-main'); switchTab('integrantes'); renderAll();
+}
+
+// ── Confetti ───────────────────────────────────────────────────────────────
+function launchConfetti(n) {
+  const colors=['#fff','#bbb','#888','#ffffff','#ffcc00'];
+  const app=document.getElementById('app');
+  for (let i=0;i<n;i++) {
+    const dot=document.createElement('div'); dot.className='confetti-dot';
+    dot.style.left=Math.random()*100+'%'; dot.style.top='-10px';
+    dot.style.background=colors[Math.floor(Math.random()*colors.length)];
+    dot.style.animationDuration=(2+Math.random()*2.5)+'s';
+    dot.style.animationDelay=(Math.random()*0.8)+'s';
+    app.appendChild(dot); setTimeout(()=>dot.remove(),4500);
   }
 }
 
-// ─── Reset ───────────────────────────────────────────────────────────────────
-function resetAll() {
-  if (!confirm('¿Borrar todo el pasanaco? Esta acción no se puede deshacer.')) return;
-  state = { members: [], sorteo: [], config: { nombre: '', aporte: '', fecha: '' } };
-  save();
-  renderAll();
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-function fmt(n) { return Number(n).toLocaleString('es-AR'); }
-
+// ── Render all ─────────────────────────────────────────────────────────────
 function renderAll() {
-  renderMembers();
-  renderSorteo();
-  document.getElementById('cfg-nombre').value = state.config.nombre || '';
-  document.getElementById('cfg-aporte').value = state.config.aporte || '';
-  document.getElementById('cfg-fecha').value  = state.config.fecha  || '';
-  const n = state.members.length;
-  const aporte = Number(state.config.aporte) || 0;
-  document.getElementById('cfg-pozo-preview').textContent = fmt(aporte * n);
+  renderMembers(); renderSorteo();
+  document.getElementById('cfg-nombre').value=state.config.nombre||'';
+  document.getElementById('cfg-aporte').value=state.config.aporte||'';
+  document.getElementById('cfg-fecha').value =state.config.fecha ||'';
+  const n=state.members.length, a=Number(state.config.aporte)||0;
+  document.getElementById('cfg-pozo-preview').textContent=fmt(a*n);
 }
 
 load();
